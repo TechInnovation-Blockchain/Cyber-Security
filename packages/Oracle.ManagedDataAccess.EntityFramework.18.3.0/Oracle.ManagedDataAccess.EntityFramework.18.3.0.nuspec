@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Oracle.ManagedDataAccess.EntityFramework</id>
+    <version>18.3.0</version>
+    <title>Official Oracle ODP.NET, Managed Entity Framework Driver</title>
+    <authors>Oracle</authors>
+    <owners>Oracle</owners>
+    <licenseUrl>http://www.oracle.com/technetwork/licenses/distribution-license-152002.html</licenseUrl>
+    <iconUrl>http://www.oracle.com/technetwork/topics/dotnet/products/oracle-4747171.png</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>This NuGet package is for ODP.NET, Managed Driver applications that use Code First and/or Entity Framework 6 applications. It will add the Oracle Entity Framework assembly and auto-configure for its use. Note that this package does not include ODP.NET, Managed Driver which is available as a separate NuGet package. This NuGet package requires VS 2012 or higher for installation.
+
+Note: The 32-bit Oracle Developer Tools for Visual Studio download from http://otn.oracle.com/dotnet is required for Entity Framework design-time features and for other Visual Studio designers such as the TableAdapter Wizard. This NuGet download does not enable design-time tools, only run-time support.</description>
+    <summary>The ODP.NET, Managed Driver Entity Framework package for EF 6 applications.</summary>
+    <copyright>2018</copyright>
+    <tags>ODP.NET Oracle DB database EF Entity Framework</tags>
+    <dependencies>
+      <dependency id="EntityFramework" version="[6.0.0, 7.0.0)" />
+      <dependency id="Oracle.ManagedDataAccess" version="[18.3.0, 19.0.0)" />
+    </dependencies>
+  </metadata>
+</package>

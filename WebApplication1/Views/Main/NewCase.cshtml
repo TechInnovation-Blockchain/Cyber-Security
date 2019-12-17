@@ -1,0 +1,186 @@
+﻿@{
+    ViewBag.Title = "New Case";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+
+<div id="id01" class="w3-modal">
+    <div class="w3-modal-content w3-animate-top w3-card-4">
+        <header class="w3-container w3-teal" style="background: url('http://localhost:2231/images/header.jpg') no-repeat center center; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; ">
+            <span onclick="hide()"
+                  class="w3-button w3-display-topright">&times;</span>
+            <h2>You can Add new Case here!</h2>
+        </header>
+        <div class="w3-container modal-background">
+            <div class="w3-section">
+                <div class="div1">
+                    <label class="div2"><b>Basic Info</b></label>
+                    <hr />
+                    <label><b class="medium_p">Firstname</b></label>
+                    <input class="firstname w3-input w3-border w3-margin-bottom w3-round-large" type="text" required>
+                    <label><b class="medium_p">Middlename</b></label>
+                    <input class="middlename w3-input w3-border w3-margin-bottom w3-round-large" type="text" required>
+                    <label><b class="medium_p">Lastname</b></label>
+                    <input class="lastname w3-input w3-border w3-margin-bottom w3-round-large" type="text" required>
+                    <label><b class="medium_p">Nationality</b></label>
+                    <input class="nationality w3-input w3-border w3-margin-bottom w3-round-large" type="text" required>
+                </div>
+                <br />
+                <div class="div1">
+                    <label class="div2"><b>Group Info</b></label>
+                    <hr />
+                    <label><b class="medium_p">Name</b></label>
+                    <input class="groupname w3-input w3-border w3-margin-bottom w3-round-large" type="text" required>
+                    <label><b class="medium_p">Country</b></label>
+                    <input class="groupcountry w3-input w3-border w3-margin-bottom w3-round-large" type="text" required>
+                </div>
+                <br />
+                <div class="div1">
+                    <label class="div2"><b>Case Info</b></label>
+                    <hr />
+                    <label><b class="medium_p">Name</b></label>
+                    <input class="casename w3-input w3-border w3-margin-bottom w3-round-large" type="text" required>
+                    <label><b class="medium_p">Text</b></label>
+                    <input class="casetext w3-input w3-border w3-margin-bottom w3-round-large" type="text" required>
+                </div>
+                <br />
+                <div class="div1">
+                    <label class="div2"><b>B_Account Info</b></label>
+                    <hr />
+                    <label><b class="medium_p">Number</b></label>
+                    <input class="baccountnumber w3-input w3-border w3-margin-bottom w3-round-large" type="text" required>
+                    <label><b class="medium_p">Country</b></label>
+                    <input class="baccountcountry w3-input w3-border w3-margin-bottom w3-round-large" type="text" required>
+                    <label><b class="medium_p">AccountType</b></label>
+                    <input class="baccounttype w3-input w3-border w3-margin-bottom w3-round-large" type="text" required>
+                </div>
+                <br />
+                <div class="div1">
+                    <label class="div2"><b>E_Account Info</b></label>
+                    <hr />
+                    <label><b class="medium_p">Name</b></label>
+                    <input class="eaccountname w3-input w3-border w3-margin-bottom w3-round-large" type="text" required>
+                    <label><b class="medium_p">Typename</b></label>
+                    <input class="eaccounttypename w3-input w3-border w3-margin-bottom w3-round-large" type="text" required>
+                </div>
+                <br />
+                <div class="div1">
+                    <label class="div2"><b>IP Info</b></label>
+                    <hr />
+                    <label><b class="medium_p">IP</b></label>
+                    <input class="ip w3-input w3-border w3-margin-bottom w3-round-large" type="text" required>
+                    <label><b class="medium_p">Country</b></label>
+                    <input class="ipcountry w3-input w3-border w3-margin-bottom w3-round-large" type="text" required>
+                </div>
+                <br />
+                <div class="div1">
+                    <label class="div2"><b>Skill Info</b></label>
+                    <hr />
+                    <label><b class="medium_p">Name</b></label>
+                    <input class="skillname w3-input w3-border w3-margin-bottom w3-round-large" type="text" required>
+                    <label><b class="medium_p">Text</b></label>
+                    <input class="skilltext w3-input w3-border w3-margin-bottom w3-round-large" type="text" required>
+                    <label><b class="medium_p">Type</b></label>
+                    <input class="skilltype w3-input w3-border w3-margin-bottom w3-round-large" type="text" required>
+                </div>
+                <br />
+                <div class="div1">
+                    <label class="div2"><b>Extra Info</b></label>
+                    <hr />
+                    <label><b class="medium_p">ID_Type</b></label>
+                    <input class="idtype w3-input w3-border w3-margin-bottom w3-round-large" type="text" required>
+                    <br />                    
+                </div>
+                <label class="createuser"></label>
+                <br />
+
+                <br />
+
+                <div style="margin-top: 10px;">
+                    <button id="btn_upgrade" class="btn btn-success" onclick="javascript:Add()" style="display:inline;">Add</button>
+                    <button id="btn_cancel" class="btn btn-primary" onclick="Cancel()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        var currentid;
+        var all_data;
+        var search_val = "";
+        $(document).ready(function () {
+            if (localStorage.getItem("permission") != "admin") {
+                alert("You have no permission to access this page!");
+                window.location.href = 'http://localhost:2231/Main/index';
+            }
+            $(".class1").removeClass("active");
+            $("#newcase").addClass("active");
+
+            $("#id01").css("display", "block");
+            var str = "<b class='big_p'>Creat User : " + localStorage.getItem("username") + "</b>";
+            $(".createuser").html(str);
+
+            $(".div1 input").css("display", "none");
+            $(".div1 label").css("display", "none");
+            $(".div2").css("display", "block");
+
+
+            $(".div1").click(function () {
+                $(".div1 input").css("display", "none");
+                $(".div1 label").css("display", "none");
+                $(".div2").css("display", "block");
+
+                $(this).children().css("display", "block");
+            });
+        });
+
+        function Add() {
+            var data = $(".w3-section input");
+            var flag = 0;
+            data.each(function () {
+                if ($(this).val() == "") {
+                    flag = 1;
+                }
+            });
+            console.log(flag);
+            if (flag == 1) {
+                alert("you missed input data");
+                return;
+            }
+            else {
+                //console.log(data);
+                var today = new Date();
+                var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+                var parse_data = ['add', $(".firstname").val(), $(".middlename").val(), $(".lastname").val(), $(".nationality").val(), $(".groupname").val(), $(".groupcountry").val(), $(".casename").val(), $(".casetext").val(), $(".baccountnumber").val(), $(".baccountcountry").val(), $(".baccounttype").val(), $(".eaccountname").val(), $(".eaccounttypename").val(), $(".ip").val(), $(".ipcountry").val(), $(".skillname").val(), $(".skilltext").val(), $(".skilltype").val(), $(".idtype").val(), date, localStorage.getItem("username")];
+                $.ajax({
+                    type: "post", url: 'http://localhost:2231/Main/AddCase',
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(parse_data), success: function (result) {
+                        console.log("Ss");
+                        
+                    }
+                });
+                alert("successfully added");
+                $('#id01').css('display', 'none');
+
+                window.location.href = "http://localhost:2231/Main/SearchCase";
+            }            
+        }
+
+        function Cancel() {
+            $('#id01').css('display', 'none');
+            window.location.href = "http://localhost:2231/Main/index";
+        }
+
+        function Search() {
+            search_val = $("#Search").val();
+            display();
+        }
+
+        function hide() {
+            document.getElementById('id01').style.display = 'none';
+            window.location.href = "http://localhost:2231/Main/index";
+        }
+    </script>
+}

@@ -1,0 +1,1 @@
+﻿window.history.pushState({}, false, "/");

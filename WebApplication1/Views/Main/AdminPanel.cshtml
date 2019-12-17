@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "AdminPanel";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+
+<h2>AdminPanel</h2>
+@section scripts{
+    <script>
+
+        $(document).ready(function () {
+            $.ajax({
+                type: "post", url: 'http://localhost:2231/Main/Example', success: function (result) {
+                    console.log(result);
+                    
+                }
+            });
+            //$('.table').html($('.table').html()+'<div class="row"><div class="cell" data-title="FullName">Vincent Williamson</div><div class="cell" data-title="Age">31</div><div class="cell" data-title="JobTitle">iOS Developer</div><div class="cell" data-title="Location">Washington</div></div><div class="row"><div class="cell" data-title="FullName">Joseph Smith</div><div class="cell" data-title="Age">27</div><div class="cell" data-title="JobTitle">Project Manager</div><div class="cell" data-title="Location">Somerville, MA</div></div>');
+        });
+    </script>
+}

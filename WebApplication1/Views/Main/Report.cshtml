@@ -1,0 +1,676 @@
+﻿@{
+    ViewBag.Title = "Report Page";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+
+<div class="search">
+    <input class="w3-input w3-border w3-margin-bottom searchinput" id="case-name" name="Search" type="text" placeholder="Casename Here!" required>
+
+    <input class="w3-input w3-border w3-margin-bottom searchinput" id="search-from" name="Search" type="text" placeholder="Date From! Type:2018-08-13" required>
+
+    <input class="w3-input w3-border w3-margin-bottom searchinput" id="search-to" name="Search" type="text" placeholder="Date To! Type:2018-08-15" required>
+
+    <button onclick="Search()" class="btn btn-info" style="display:inline; margin-left: 10px;">Search</button>
+</div>
+
+<div class="limiter">
+    <div class="container-table100" id="content1">
+        <div class="wrap-table100">
+            <table id="tab_customers" class="table">
+                <thead>
+                    <tr class='row header'>
+                        <th class="cell">No</th>
+                        <th class="cell">First Name</th>
+                        <th class="cell">Middle Name</th>
+                        <th class="cell">Last Name</th>
+                        <th class="cell">Nationality</th>
+                        <th class="cell">Case Name</th>
+                        <th class="cell">Case Text</th>
+                        <th class="cell">Create User ID</th>
+                    </tr>
+                </thead>
+                <tbody class="table-body" id="abc"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="search" style="padding:10px;">
+    <button onclick="Print_OneCase()" class="btn btn-success" style="display:inline; margin-left: 10px;">Print_OneCase</button>
+    <button onclick="Print_MultipleCase()" class="btn btn-success" style="display:inline; margin-left: 10px;">Print_MultipleCase</button>
+</div>
+
+<div id="id02" class="w3-modal modal-content-print">
+    <div class="w3-modal-content w3-animate-top w3-card-4">
+        <header class="w3-container w3-teal" style="background: url('http://localhost:2231/images/header.jpg') no-repeat center center; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; height:0px;">
+            @*<span onclick="document.getElementById('id02').style.display='none'"
+                  class="w3-button w3-display-topright">&times;</span>*@
+            @*<h2>Case Detail Information</h2>*@
+        </header>
+        <div class="w3-container modal-background">
+            <div class="w3-section">
+                <label><b class="big_p">Basic Info</b></label>
+                <br />
+                <hr />
+                <label class="firstname"><b>Firstname : Firstname</b></label>
+                <label class="middlename" style="margin-left:10px;"><b>Middlename : Firstname</b></label>
+                <label class="lastname" style="margin-left:10px;"><b>Middlename : Firstname</b></label>
+                <br />
+                <label class="nationality"><b>Nationality : Firstname</b></label>
+                <br />
+                <br />
+                <label><b class="big_p">Group Info</b></label>
+                <br />
+                <hr />
+                <label class="groupname"><b>Name : Firstname</b></label>
+                <label class="groupcountry" style="margin-left:10px;"><b>Country : Firstname</b></label>
+                <br />
+                <br />
+                <label><b class="big_p">Case Info</b></label>
+                <br />
+                <hr />
+                <label class="casename"><b>Name : Firstname</b></label>
+                <br />
+                <label class="casetext"><b>Country : Firstname</b></label>
+                <br />
+                <br />
+                <label><b class="big_p">B_Account Info</b></label>
+                <br />
+                <hr />
+                <label class="baccountnumber"><b>Name : Firstname</b></label>
+                <label class="baccountcountry" style="margin-left:10px;"><b>Country : Firstname</b></label>
+                <label class="baccounttype" style="margin-left:10px;"><b>Country : Firstname</b></label>
+                <br />
+                <br />
+                <label><b class="big_p">E_Account Info</b></label>
+                <br />
+                <hr />
+                <label class="eaccountname"><b>Name : Firstname</b></label>
+                <label class="eaccounttypename" style="margin-left:10px;"><b>Country : Firstname</b></label>
+                <br />
+                <br />
+                <label><b class="big_p">IP Info</b></label>
+                <br />
+                <hr />
+                <label class="ip"><b>Name : Firstname</b></label>
+                <label class="ipcountry" style="margin-left:10px;"><b>Country : Firstname</b></label>
+                <br />
+                <br />
+                <label><b class="big_p">Skill Info</b></label>
+                <br />
+                <hr />
+                <label class="skillname"><b>Name : Firstname</b></label>
+                <label class="skilltext" style="margin-left:10px;"><b>Country : Firstname</b></label>
+                <label class="skilltype" style="margin-left:10px;"><b>Country : Firstname</b></label>
+                <br />
+                <br />
+                <label><b class="big_p">Extra Info</b></label>
+                <br />
+                <hr />
+                <label class="idtype"><b>Name : Firstname</b></label>
+                <label class="createuser" style="margin-left:10px;"></label>
+                <label class="lastmodifytime"></label>
+                <br />
+                <br />
+                <div style="margin-top: 10px;" class="footer">
+                    <button class="btn btn-primary" onclick="PrintOne()">Print</button>
+                    <button class="btn btn-primary" onclick="document.getElementById('id02').style.display = 'none'">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="id01" class="modal1">
+
+    <!-- Modal content -->
+    <div class="modal-content1">
+        <span class="close" onclick="document.getElementById('id02').style.display='none'">&times;</span>
+        <div class="limiter1">
+            <table class="table1 table2">
+                
+            </table>
+        </div>
+
+        <div class="footer" style="margin-top: 10px;">
+            <button class="btn btn-primary" onclick="PrintOne()">Print</button>
+            <button class="btn btn-primary" onclick="document.getElementById('id02').style.display = 'none'">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<div id="id03" class="modal1">
+    <div class="modal-content2">
+        <span class="close" onclick="document.getElementById('id03').style.display='none'">&times;</span>
+        <span>From</span>
+        <span id="from"></span>
+        <span>To</span>
+        <span id="to"></span>
+        <div class="limiter1" id="limiter1">
+            <table class="table1 table3" id="table3">
+                
+            </table>
+        </div>
+
+        <div class="footer" style="margin-top: 10px;">
+            <button class="btn btn-primary" onclick="PrintMulti()">Print</button>
+            <button class="btn btn-primary" onclick="document.getElementById('id03').style.display = 'none'">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+
+@section Styles {
+    <style>
+        .modal1 {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content1 {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 10px;
+            border: 1px solid #888;
+            font-size: 11px;
+            word-break: break-all;
+        }
+
+        .modal-content2 {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 10px;
+            border: 1px solid #888;
+            font-size: 14px;
+            word-break: break-all;
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        table.table1 {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td.td1{
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 6px;
+            /*max-width: 15px;*/
+            word-break: break-word;
+        }
+        th.th1 {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 6px;
+            /*max-width: 15px;*/
+            word-break: break-word;
+        } 
+        tr.tr1:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+}
+@section scripts{
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.5/jspdf.plugin.autotable.js"></script>
+    <script src="https://docraptor.com/docraptor-1.0.0.js"></script>
+    <script>
+        var editid;
+        var all_data;
+        var search_case_name = "";
+        var search_date_from = "", search_date_to = "";
+        $(document).ready(function () {
+            $(".class1").removeClass("active");
+            $("#reports").addClass("active");
+        });
+
+        function display() {
+            $.ajax({
+                type: "post", url: 'http://localhost:2231/Main/GetDataForCase', success: function (result) {
+
+                    $('.table-body').html("");
+                    var i = 1;
+                    all_data = result;
+                    if ((search_case_name == "") && ($("#search-from").val() == "") && ($("#search-to").val() == "")) {
+                        result.forEach(function (element) {
+                            $('.table-body').html($('.table-body').html() + '<tr class="row rowbody" id=' + element.ID + '><th class="cell">' + (i++) + '</th><th class="cell">' + element.Firstname + '</th><th class="cell">' + element.Middlename + '</th><th class="cell">' + element.Lastname + '</th><th class="cell">' + element.Nationality + '</th><th class="cell">' + element.Case_name + '</th><th class="cell">' + element.Case_text + '</th><th class="cell">' + element.Username + '</th></tr>');
+                        });
+                    }
+                    else if ((search_case_name != "") && ((($("#search-from").val() == "") && ($("#search-to").val() == "")))) {
+                        result.forEach(function (element) {
+                            if (String(element.Case_name).indexOf(String(search_case_name)) != -1 || String(element.Firstname).indexOf(String(search_case_name)) != -1 || String(element.Middlename).indexOf(String(search_case_name)) != -1 || String(element.Group_name).indexOf(String(search_case_name)) != -1 || String(element.Group_country).indexOf(String(search_case_name)) != -1 || String(element.Case_text).indexOf(String(search_case_name)) != -1 || String(element.ID_type).indexOf(String(search_case_name)) != -1 || String(element.B_Account_number).indexOf(String(search_case_name)) != -1 || String(element.B_Account_country).indexOf(String(search_case_name)) != -1 || String(element.B_Account_type).indexOf(String(search_case_name)) != -1 || String(element.E_Account_name).indexOf(String(search_case_name)) != -1 || String(element.E_Account_typename).indexOf(String(search_case_name)) != -1 || String(element.IPs_ip).indexOf(String(search_case_name)) != -1 || String(element.IPs_country).indexOf(String(search_case_name)) != -1 || String(element.Skill_name).indexOf(String(search_case_name)) != -1 || String(element.Skill_text).indexOf(String(search_case_name)) != -1 || String(element.Nationality).indexOf(String(search_case_name)) != -1 || String(element.Skill_type).indexOf(String(search_case_name)) != -1) {
+                                $('.table-body').html($('.table-body').html() + '<tr class="row rowbody" id=' + element.ID + '><th class="cell">' + (i++) + '</th><th class="cell">' + element.Firstname + '</th><th class="cell">' + element.Middlename + '</th><th class="cell">' + element.Lastname + '</th><th class="cell">' + element.Nationality + '</th><th class="cell">' + element.Case_name + '</th><th class="cell">' + element.Case_text + '</th><th class="cell">' + element.Username + '</th></tr>');
+                            }
+                        });
+                    }
+
+                    else {
+
+                        result.forEach(function (element) {
+                            if (String(element.Case_name).indexOf(String(search_case_name)) != -1 || String(element.Firstname).indexOf(String(search_case_name)) != -1 || String(element.Middlename).indexOf(String(search_case_name)) != -1 || String(element.Group_name).indexOf(String(search_case_name)) != -1 || String(element.Group_country).indexOf(String(search_case_name)) != -1 || String(element.Case_text).indexOf(String(search_case_name)) != -1 || String(element.ID_type).indexOf(String(search_case_name)) != -1 || String(element.B_Account_number).indexOf(String(search_case_name)) != -1 || String(element.B_Account_country).indexOf(String(search_case_name)) != -1 || String(element.B_Account_type).indexOf(String(search_case_name)) != -1 || String(element.E_Account_name).indexOf(String(search_case_name)) != -1 || String(element.E_Account_typename).indexOf(String(search_case_name)) != -1 || String(element.IPs_ip).indexOf(String(search_case_name)) != -1 || String(element.IPs_country).indexOf(String(search_case_name)) != -1 || String(element.Skill_name).indexOf(String(search_case_name)) != -1 || String(element.Skill_text).indexOf(String(search_case_name)) != -1 || String(element.Nationality).indexOf(String(search_case_name)) != -1 || String(element.Skill_type).indexOf(String(search_case_name)) != -1) {
+                                if (compare_date($("#search-from").val(), element.ModifyTime) == 0 && compare_date(element.ModifyTime, $("#search-to").val()) == 0) {
+                                    $('.table-body').html($('.table-body').html() + '<tr class="row rowbody" id=' + element.ID + '><th class="cell">' + (i++) + '</th><th class="cell">' + element.Firstname + '</th><th class="cell">' + element.Middlename + '</th><th class="cell">' + element.Lastname + '</th><th class="cell">' + element.Nationality + '</th><th class="cell">' + element.Case_name + '</th><th class="cell">' + element.Case_text + '</th><th class="cell">' + element.Username + '</th></tr>');
+                                }
+                            }
+                        });
+                    }
+
+                    var imgData = $('tbody>tr');
+                    if (imgData.length == 0) {
+                        alert("no result");
+                        return;
+                    }
+
+
+                    //$(".rowbody").click(function () {
+                    //    console.log($(this).attr("id"));
+                    //    var currentid = $(this).attr("id");
+                    //    $("#id01").css("display", "block");
+                    //    all_data.forEach(function (element) {
+                    //        console.log(currentid);
+                    //        if (element.ID == currentid) {
+                    //            var str = "<b>Firstname : " + element.Firstname + "</b>";
+                    //            $(".firstname").html(str);
+                    //            str = "<b>Middlename : " + element.Middlename + "</b>";
+                    //            $(".middlename").html(str);
+                    //            str = "<b>Lastname : " + element.Lastname + "</b>";
+                    //            $(".lastname").html(str);
+
+                    //            str = "<b>Nationality : " + element.Nationality + "</b>";
+                    //            $(".nationality").html(str);
+
+                    //            str = "<b>Name : " + element.Group_name + "</b>";
+                    //            $(".groupname").html(str);
+                    //            str = "<b>Country : " + element.Group_country + "</b>";
+                    //            $(".groupcountry").html(str);
+
+                    //            str = "<b>Name : " + element.Case_name + "</b>";
+                    //            $(".casename").html(str);
+                    //            str = "<b>Text : " + element.Case_text + "</b>";
+                    //            $(".casetext").html(str);
+
+                    //            str = "<b>Number : " + element.B_Account_number + "</b>";
+                    //            $(".baccountnumber").html(str);
+                    //            str = "<b>Country : " + element.B_Account_country + "</b>";
+                    //            $(".baccountcountry").html(str);
+                    //            str = "<b>Type : " + element.B_Account_type + "</b>";
+                    //            $(".baccounttype").html(str);
+
+                    //            str = "<b>Name : " + element.E_Account_name + "</b>";
+                    //            $(".eaccountname").html(str);
+                    //            str = "<b>TypeName : " + element.E_Account_typename + "</b>";
+                    //            $(".eaccounttypename").html(str);
+
+                    //            str = "<b>IP : " + element.IPs_ip + "</b>";
+                    //            $(".ip").html(str);
+                    //            str = "<b>Country : " + element.IPs_country + "</b>";
+                    //            $(".ipcountry").html(str);
+
+                    //            str = "<b>Name : " + element.Skill_name + "</b>";
+                    //            $(".skillname").html(str);
+                    //            str = "<b>Text : " + element.Skill_text + "</b>";
+                    //            $(".skilltext").html(str);
+                    //            str = "<b>Type : " + element.Skill_type + "</b>";
+                    //            $(".skilltype").html(str);
+
+                    //            str = "<b>Creat User : " + element.Username + "</b>";
+                    //            $(".createuser").html(str);
+                    //            str = "<b>Firstname : " + element.ID_type + "</b>";
+                    //            $(".idtype").html(str);
+
+                    //            str = "<b>Last ModifiedTime : " + element.ModifyTime + "</b>";
+                    //            $(".lastmodifytime").html(str);
+                    //        }
+                    //    });
+                    //});
+
+                }
+            });
+        }
+        function Search() {
+            $('.table-body').html("");
+            search_case_name = $("#case-name").val();
+            search_date_from = $("#search-from").val();
+            search_date_to = $("#search-to").val();
+            if (search_case_name == "" && search_date_from == "" && search_date_to == "") {
+                //alert("You must input something!")
+                return;
+            }
+            
+            else if ((search_case_name == "") && ($("#search-from").val() == "") && ($("#search-to").val() == "")) {
+                display();
+                return;
+            }
+            else if ((search_case_name == "") || (($("#search-from").val() == "") && ($("#search-to").val() == ""))) {
+                display();
+                return;
+            }
+            else if (compare_date(search_date_from, search_date_to) == 3) {
+                return;
+            }
+            else if ((search_case_name != "") || (search_date_from != "" && search_date_to != "")) {
+                display();
+            }
+        }
+
+        function compare_date(val1, val2) {
+            var d1 = new Date(val1);
+            var d2 = new Date(val2);
+            if(val1 == "" || val2 == ""){
+                return 3;
+            }
+            else if (d1 <= d2) {
+                return 0;
+            }
+            else if (d1 >= d2) {
+                return 1;
+            }
+            else if (d1 == d2) {
+
+                return 2;
+            }
+            else {
+                return 3;
+            }
+        }
+
+        function Print_OneCase() {    
+            console.log(($('tbody>tr')));
+            var imgData = $('tbody>tr');
+            var id = [];
+            var i = 0;
+            console.log(imgData);
+            if (imgData.length == 0) {
+                alert("no data to print");
+                return;
+            }
+            $("#id02").css("display", "block");
+            imgData.each(function () {
+                id[i++] = $(this).attr('id');
+            });
+
+            //$('.table2').html();
+            //all_data.forEach(function (element) {
+            //    console.log(element);
+            //    if (parseInt(element.ID) == parseInt(id[0])) {                   
+            //        $('.table2').html('<tr class="tr1"><th class="th1">Case Name</th><th class="th1">Case Text</th><th class="th1">First Name</th><th class="th1">Middle Name</th><th class="th1">Last Name</th><th class="th1">Nationality</th><th class="th1">Group name</th><th class="th1">Group country</th><th class="th1">ID type</th><th class="th1">B_Account number</th><th class="th1">B_Account country</th><th class="th1">B_Account type</th><th class="th1">E_Account name</th><th class="th1">E_Account typename</th><th class="th1">IPs ip</th><th class="th1">IPs country</th><th class="th1">Skill name</th><th class="th1">Skill text</th><th class="th1">Skill type</th><th class="th1">ModifyTime</th></tr>' + '<tr class="tr1" id=' + element.ID + '><td class="td1">' + element.Case_name + '</td><td class="td1">' + element.Case_text + '</td><td class="td1">' + element.Firstname + '</td><td class="td1">' + element.Middlename + '</td><td class="td1">' + element.Lastname + '</td><td class="td1">' + element.Nationality + '</td><td class="td1">' + element.Group_name + '</td><td class="td1">' + element.Group_country + '</td><td class="td1">' + element.ID_type + '</td><td class="td1">' + element.B_Account_number + '</td><td class="td1">' + element.B_Account_country + '</td><td class="td1">' + element.B_Account_type + '</td><td class="td1">' + element.E_Account_name + '</td><td class="td1">' + element.E_Account_typename + '</td><td class="td1" style="word-break: inherit;">' + element.IPs_ip + '</td><td class="td1">' + element.IPs_country + '</td><td class="td1">' + element.Skill_name + '</td><td class="td1">' + element.Skill_text + '</td><td class="td1">' + element.Skill_type + '</td><td class="td1">' + element.ModifyTime + '</td></tr>');
+            //    }
+            //});
+
+            
+            all_data.forEach(function (element) {
+                //console.log(currentid);
+                if (parseInt(element.ID) == parseInt(id[0])) {
+                    var str = "<b class='medium_p'>Firstname : " + element.Firstname + "</b>";
+                    $(".firstname").html(str);
+                    str = "<b class='medium_p'>Middlename : " + element.Middlename + "</b>";
+                    $(".middlename").html(str);
+                    str = "<b class='medium_p'>Lastname : " + element.Lastname + "</b>";
+                    $(".lastname").html(str);
+
+                    str = "<b class='medium_p'>Nationality : " + element.Nationality + "</b>";
+                    $(".nationality").html(str);
+
+                    str = "<b class='medium_p'>Name : " + element.Group_name + "</b>";
+                    $(".groupname").html(str);
+                    str = "<b class='medium_p'>Country : " + element.Group_country + "</b>";
+                    $(".groupcountry").html(str);
+
+                    str = "<b class='medium_p'>Name : " + element.Case_name + "</b>";
+                    $(".casename").html(str);
+                    str = "<b class='medium_p'>Text : " + element.Case_text + "</b>";
+                    $(".casetext").html(str);
+
+                    str = "<b class='medium_p'>Number : " + element.B_Account_number + "</b>";
+                    $(".baccountnumber").html(str);
+                    str = "<b class='medium_p'>Country : " + element.B_Account_country + "</b>";
+                    $(".baccountcountry").html(str);
+                    str = "<b class='medium_p'>Type : " + element.B_Account_type + "</b>";
+                    $(".baccounttype").html(str);
+
+                    str = "<b class='medium_p'>Name : " + element.E_Account_name + "</b>";
+                    $(".eaccountname").html(str);
+                    str = "<b class='medium_p'>TypeName : " + element.E_Account_typename + "</b>";
+                    $(".eaccounttypename").html(str);
+
+                    str = "<b class='medium_p'>IP : " + element.IPs_ip + "</b>";
+                    $(".ip").html(str);
+                    str = "<b class='medium_p'>Country : " + element.IPs_country + "</b>";
+                    $(".ipcountry").html(str);
+
+                    str = "<b class='medium_p'>Name : " + element.Skill_name + "</b>";
+                    $(".skillname").html(str);
+                    str = "<b class='medium_p'>Text : " + element.Skill_text + "</b>";
+                    $(".skilltext").html(str);
+                    str = "<b class='medium_p'>Type : " + element.Skill_type + "</b>";
+                    $(".skilltype").html(str);
+
+
+                    str = "<b class='medium_p'>ID_Type : " + element.ID_type + "</b>";
+                    $(".idtype").html(str);
+
+                    str = "<b class='medium_p'>Creat User : " + element.Username + "</b>";
+                    $(".createuser").html(str);
+                    str = "<b class='medium_p'>Last ModifiedTime : " + element.ModifyTime + "</b>";
+                    $(".lastmodifytime").html(str);
+                }
+            });
+
+
+
+
+
+
+
+
+            //console.log($('.limiter')[0]);
+            ////var doc = new jsPDF('p', 'pt', 'letter');
+            //    //doc.fromHTML($('.limiter')[0], 15, 15, {
+            //    //    width: 170
+            //    //}, function () {
+            //    //    doc.save('sample-file.pdf');
+            ////});
+            //var html = '<html><head></head><body><div class="limiter"><div class="container-table100" id="content1"><div class="wrap-table100"><table id="tab_customers" class="table"><thead><tr class="row header"><th class="cell">No</th><th class="cell">First Name</th><th class="cell">Middle Name</th><th class="cell">Last Name</th><th class="cell">Nationality</th><th class="cell">Case Name</th><th class="cell">Case Text</th><th class="cell">Create User ID</th></tr></thead><tbody class="table-body" id="abc"></tbody></table></div></div></div></body></html>';
+
+            
+
+            //$.post("https://selectpdf.com/api2/convert/", {key:"c54825b0-f274-4c5a-8e2c-cb069bb1b921", url: 'http://selectpdf.com/html-to-pdf-api.html'}, function(data, status){
+            //    console.log(data.pdf);
+            //    console.log(status);
+            //});
+
+        }
+        function Print_MultipleCase() {
+            console.log(compare_date($("#search-from").val(), $("#search-to").val()));
+            if (compare_date($("#search-from").val(), $("#search-to").val()) != 3) {
+                $("#id03").css("display", "block");
+                //console.log(($('tbody>tr')));
+                var imgData = $('tbody>tr');
+                var id = [];
+                var i = 0;
+                imgData.each(function () {
+                    id[i++] = $(this).attr('id');
+                });
+                $('.table3').html();
+                $("#from").html($("#search-from").val());
+                $("#to").html($("#search-to").val());
+                console.log(id);
+                i = 0;
+                $('.table3').html('<tr class="tr1"><th class="th1">Case Name</th><th class="th1">Case Text</th><th class="th1">First Name</th><th class="th1">Middle Name</th><th class="th1">Last Name</th><th class="th1">Group name</th><th class="th1">Group country</th><th class="th1">ID type</th><th class="th1">IPs ip</th><th class="th1">Skill name</th><th class="th1">Skill text</th><th class="th1">Skill type</th><th class="th1">ModifyTime</th></tr>');
+                all_data.forEach(function (element) {
+                    if (parseInt(element.ID) == parseInt(id[i])) {
+                        $('.table3').html($('.table3').html() + '<tr class="tr1" id=' + element.ID + '><td class="td1">' + element.Case_name + '</td><td class="td1">' + element.Case_text + '</td><td class="td1">' + element.Firstname + '</td><td class="td1">' + element.Middlename + '</td><td class="td1">' + element.Lastname + '</td><td class="td1">' + element.Group_name + '</td><td class="td1">' + element.Group_country + '</td><td class="td1">' + element.ID_type + '</td><td class="td1">' + element.IPs_ip + '</td><td class="td1">' + element.Skill_name + '</td><td class="td1">' + element.Skill_text + '</td><td class="td1">' + element.Skill_type + '</td><td class="td1">' + element.ModifyTime + '</td></tr>');
+                        i++;
+                    }
+                });
+            }
+            else {
+                alert("please set date");
+            }
+        }
+
+        function PrintOne() {
+            //var pdf = new jsPDF('p', 'pt', 'a4');
+            //$('.close').css('display', 'none');
+            //$('.footer').css('display', 'none');
+            //pdf.addHTML($('.modal-content-print')[0], function () {
+            //    pdf.save('Test.pdf');
+            //    $('.close').css('display', 'block');
+            //    $('.footer').css('display', 'block');
+            //});
+
+            $('.footer').css('display', 'none');
+            //$('.footer').css('display', 'none');
+            var sTable = document.getElementById('id02').innerHTML;
+            $('.footer').css('display', 'block');
+            var style = "<style>";
+            style = style + "table {width: 100%;font: 17px Calibri;}";
+            style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+            style = style + "padding: 2px 3px;text-align: center;}";
+            style = style + "</style>";
+
+            // CREATE A WINDOW OBJECT.
+            var win = window.open('', '', 'height=700,width=700');
+
+            win.document.write('<html><head>');
+            win.document.write('<title>' + 'Case' + '</title>');   // <title> FOR PDF HEADER.
+            win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
+            win.document.write('</head>');
+            win.document.write('<body>');
+            win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+            win.document.write('</body></html>');
+
+            win.document.close(); 	// CLOSE THE CURRENT WINDOW.
+
+            win.print();
+
+
+        }
+        function PrintMulti() {
+            //var pdf = new jsPDF('p', 'pt', 'a4');
+            //var widthMm = 15;
+            //var heightMm = 10;
+            //var pdf = new jsPDF({
+            //    orientation: widthMm > heightMm ? "L" : "P",
+            //    unit: "pt",
+            //    format: {
+            //        width: widthMm,
+            //        height: heightMm
+            //    }
+            //});
+            //console.log($('.limiter')[0]);
+            //console.log(html);
+
+
+
+
+
+            //$('.close').css('display', 'none');
+            //$('.footer').css('display', 'none');
+            //pdf.addHTML($('.modal-content2')[0], function () {
+            //    pdf.save('Test.pdf');
+            //    $('.close').css('display', 'block');
+            //    $('.footer').css('display', 'block');
+            //});
+
+
+            var sTable = document.getElementById('limiter1').innerHTML;
+
+            var style = "<style>";
+            style = style + "table {width: 100%;font: 17px Calibri;}";
+            style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+            style = style + "padding: 2px 3px;text-align: center;}";
+            style = style + "</style>";
+
+            // CREATE A WINDOW OBJECT.
+            var win = window.open('', '', 'height=700,width=700');
+
+            win.document.write('<html><head>');
+            win.document.write('<title>' + $("#search-from").val() + ' '+'To'+' ' + $("#search-to").val() + '</title>');   // <title> FOR PDF HEADER.
+            win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
+            win.document.write('</head>');
+            win.document.write('<body>');
+            win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+            win.document.write('</body></html>');
+
+            win.document.close(); 	// CLOSE THE CURRENT WINDOW.
+
+            win.print();    // PRINT THE CONTENTS.
+
+
+
+
+            //var pdf = new jsPDF('p', 'pt', 'letter');
+
+            //pdf.cellInitialize();
+            //pdf.setFontSize(10);
+            //$.each($('#table3 tr'), function (i, row) {
+            //    $.each($(row).find("td, th"), function (j, cell) {
+            //        var txt = $(cell).text().trim() || " ";
+            //        //var width = (j == 4) ? 40 : 70; //make 4th column smaller
+            //        var width = 70;
+            //        pdf.cell(10, 50, width, 30, txt, i);
+            //    });
+            //});
+
+            //pdf.save('sample-file.pdf');
+
+
+            //var pdf = new jsPDF('p', 'pt', 'letter');
+            //source = $('.modal-content2')[0];
+            //specialElementHandlers = {
+            //    '#bypassme': function (element, renderer) {
+            //        return true
+            //    }
+            //};
+            //margins = {
+            //    top: 80,
+            //    bottom: 60,
+            //    left: 40,
+            //    width: 622
+            //};
+            //pdf.fromHTML(
+            //    source, // HTML string or DOM elem ref.
+            //    margins.left, // x coord
+            //    margins.top, { // y coord
+            //        'width': margins.width, // max width of content on PDF
+            //        'elementHandlers': specialElementHandlers
+            //    },
+            // function (dispose) {
+            //     // dispose: object with X, Y of the last line add to the PDF 
+            //     //          this allow the insertion of new lines after html
+            //     pdf.save('YourTable.pdf');
+            // }, margins
+            //);
+
+        }
+    </script>
+}

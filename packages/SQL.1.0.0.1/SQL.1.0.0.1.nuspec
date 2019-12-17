@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>SQL</id>
+    <version>1.0.0.1</version>
+    <title>SQL</title>
+    <authors>Carlos J. López - twitter/carlosjln</authors>
+    <owners>Carlos J. López - twitter/carlosjln</owners>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://github.com/carlosjln/SQL</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Simple and fluent SQL helpers. (Alpha version)</description>
+    <summary />
+    <copyright>Copyright © 2013</copyright>
+  </metadata>
+</package>

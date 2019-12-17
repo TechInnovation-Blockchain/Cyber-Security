@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "First Page";
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+
+<h1 style="text-align: center; font-family: monospace; color: chartreuse;">Welcome To Our Site</h1>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            //console.log('@Session["Permission"]');
+            localStorage.setItem("permission", '@Session["Permission"]');
+            localStorage.setItem("username", '@Session["username"]');
+        });
+    </script>
+}
